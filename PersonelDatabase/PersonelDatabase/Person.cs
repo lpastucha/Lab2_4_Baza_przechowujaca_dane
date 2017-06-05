@@ -36,9 +36,9 @@ namespace PersonelDatabase
         }
 
         override
-   public String ToString()
+        public String ToString()
         {
-            return "[Name: " + this.name + " Lastname: " + this.lastname + " Age: " + this.age + " Gender: " + this.gender +"]";
+            return "[ID: " + ID + " Name: " + this.name + " Lastname: " + this.lastname + " Age: " + this.age + " Gender: " + this.gender +"]";
         }
     }
 }
