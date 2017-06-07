@@ -38,7 +38,14 @@ namespace PersonelDatabase
 
         private int GetChoice()
         {
-            return (int) Console.Read();
+            try
+            {
+                return Int16.Parse(Console.ReadLine());
+            }catch(Exception e)
+            {
+               // Console.Error.Write(e);
+            }
+            return 1000;
         } 
 
         private void RunModule(int choice)
@@ -49,7 +56,7 @@ namespace PersonelDatabase
                 case 2: ModuleRemove(); break;
                 case 3: ModuleShow(); break;
                 case 4: return;
-                default: Console.Clear(); ShowChoiceError();  ShowMenu(); break;
+                default: Console.Clear(); ShowChoiceError(); break;
             }
 
             ShowProgramModule();
@@ -61,7 +68,7 @@ namespace PersonelDatabase
             Console.WriteLine("ID : ");
             try
             {
-                int ID = Console.Read();
+                int ID = Int32.Parse(Console.ReadLine());
                 Person person = new Person(ID);
                 Console.WriteLine("Name: ");
                 String name = Console.ReadLine();
@@ -69,10 +76,10 @@ namespace PersonelDatabase
                 String lastname = Console.ReadLine();
                 person.SetNameData(name, lastname);
                 Console.WriteLine("Age : ");
-                int age = Console.Read();
+                int age = Int16.Parse(Console.ReadLine());
                 person.SetAge(age);
                 Console.WriteLine("Choose GENGER: 1 - MALE ; 2 - FEMALE");
-                int gender = Console.Read();
+                int gender = Int16.Parse(Console.ReadLine());
                 switch (gender)
                 {
                     case 1: person.SetGender(Gender.MALE);break ;
@@ -80,22 +87,32 @@ namespace PersonelDatabase
                     default: break;
                 }
                 database.AddToDatabase(person);
+                Console.Clear();
                 Console.WriteLine("Person added: " + person);
 
             }
             catch(Exception e)
             {
-                Console.WriteLine("Wrong data format. Press Enter and try again...");
-                Console.Read();
+                Console.Write("Wrong data format. Press Enter and try again...");
+                Console.ReadKey();
                 ModuleAdd();
             }
-
-            
         }
 
         private void ModuleRemove()
         {
-            Console.Clear();
+            try
+            {
+                Console.Clear();
+                database.ShowPersonsList();
+                Console.WriteLine("Choose person nr to remove!");
+                int result = Int32.Parse(Console.ReadLine());
+                database.RemoveFromDatabase(database.getPerson(result-1));
+            }
+            catch(Exception e)
+            {
+                ModuleRemove();
+            }
         }
 
         private void ModuleShow()

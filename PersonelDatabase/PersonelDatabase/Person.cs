@@ -40,5 +40,7 @@ namespace PersonelDatabase
         {
             return "[ID: " + ID + " Name: " + this.name + " Lastname: " + this.lastname + " Age: " + this.age + " Gender: " + this.gender +"]";
         }
+
+
     }
 }

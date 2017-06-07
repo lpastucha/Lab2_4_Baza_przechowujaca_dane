@@ -22,6 +22,11 @@ namespace PersonelDatabase
                 personStorage.Add(person);
             }
         }
+
+        public Person  getPerson(int index)
+        {
+            return personStorage.ElementAt(index);
+        }
         
         public void RemoveFromDatabase(Person person) 
         {
@@ -35,9 +40,14 @@ namespace PersonelDatabase
 
         public void ShowPersonsList()
         {
+            int i = 1;
+            if (personStorage.Count() == 0)
+            {
+                Console.Out.WriteLine("No persons are available!");
+            }
             foreach(Person person in personStorage)
             {
-                Console.Out.WriteLine("Person ->" + person);
+                Console.Out.WriteLine(i++ + "->" + person);
             }
         }
 
